@@ -1,0 +1,13 @@
+{
+  "name": "infor-login-visualizer",
+  "version": "1.0.0",
+  "description": "Visualizes Infor LOGIN/LOGOUT monitoring events with KPIs and a world map.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

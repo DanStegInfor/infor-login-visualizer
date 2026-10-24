@@ -1,0 +1,9 @@
+# Secrets — never commit
+*.ionapi
+.env
+*.pem
+*.key
+
+# Local artifacts
+node_modules/
+*.log

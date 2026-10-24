@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: infor-login-visualizer
+    runtime: node
+    plan: free
+    # No dependencies to install (zero-dependency app). Node >=18 provides global fetch.
+    buildCommand: "echo no build step"
+    startCommand: "node server.js"
+    envVars:
+      # Set IONAPI_JSON in the Render dashboard (Environment tab) as a SECRET.
+      # It must contain the full .ionapi JSON on one line. Never commit the .ionapi file.
+      - key: IONAPI_JSON
+        sync: false
