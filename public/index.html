@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Infor Login Events — Global Activity</title>
+  <title>Login Events — Global Activity</title>
   <link rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -17,7 +17,7 @@
   <header class="topbar">
     <div class="brand">
       <span class="dot"></span>
-      <h1>Login Events — Global Activity</h1>
+      <h1 id="appTitle">Login Events — Global Activity</h1>
     </div>
     <div class="controls">
       <div class="period-group" id="periodGroup" role="group" aria-label="Time period">
@@ -28,10 +28,18 @@
         <button data-period="30d">30d</button>
       </div>
       <label class="user-filter">
-        <span>User</span>
+        <span id="lblUser">User</span>
         <select id="userSelect" aria-label="Filter by user">
           <option value="">All users</option>
         </select>
+      </label>
+      <label class="user-filter">
+        <span id="lblLang">Language</span>
+        <select id="langSelect" aria-label="Language"></select>
+      </label>
+      <label class="user-filter">
+        <span id="lblTheme">Theme</span>
+        <select id="themeSelect" aria-label="Theme"></select>
       </label>
       <button id="refreshBtn" class="refresh" title="Refresh">↻</button>
     </div>
@@ -42,31 +50,48 @@
 
     <section class="grid">
       <div class="card map-card">
-        <div class="card-head"><h2>Login locations</h2><span id="mapMeta" class="meta"></span></div>
+        <div class="card-head"><h2 id="mapTitle">Login locations</h2><span id="mapMeta" class="meta"></span></div>
         <div id="map"></div>
       </div>
 
       <div class="card">
-        <div class="card-head"><h2>Logins over time</h2></div>
+        <div class="card-head"><h2 id="timelineTitle">Logins over time</h2></div>
         <div id="timeline" class="chart"></div>
+        <div id="timelineAxis" class="axis"></div>
       </div>
 
       <div class="card">
-        <div class="card-head"><h2>Top countries</h2></div>
+        <div class="card-head"><h2 id="countriesTitle">Top countries</h2></div>
         <div id="countries" class="chart bars"></div>
       </div>
 
       <div class="card">
-        <div class="card-head"><h2>Top users</h2></div>
+        <div class="card-head"><h2 id="usersTitle">Top users</h2></div>
         <div id="topUsers" class="chart bars"></div>
       </div>
 
       <div class="card wide">
-        <div class="card-head"><h2>Recent events</h2><span id="tableMeta" class="meta"></span></div>
+        <div class="card-head">
+          <h2 id="recentTitle">Recent events</h2>
+          <div class="table-controls">
+            <input type="search" id="tableSearch" class="tsearch" placeholder="Search…" />
+            <select id="actionFilter" class="tfilter"></select>
+            <span id="tableMeta" class="meta"></span>
+          </div>
+        </div>
         <div class="table-wrap">
           <table id="eventsTable">
             <thead>
-              <tr><th>Time (UTC)</th><th>Action</th><th>User</th><th>City</th><th>Country</th><th>IP</th><th>Session</th><th>MFA</th></tr>
+              <tr>
+                <th data-sort="logTime" class="sortable">Time <span class="arrow"></span></th>
+                <th data-sort="action" class="sortable">Action <span class="arrow"></span></th>
+                <th data-sort="userName" class="sortable">User <span class="arrow"></span></th>
+                <th data-sort="city" class="sortable">City <span class="arrow"></span></th>
+                <th data-sort="country" class="sortable">Country <span class="arrow"></span></th>
+                <th data-sort="ip" class="sortable">IP <span class="arrow"></span></th>
+                <th data-sort="sessionDuration" class="sortable">Session <span class="arrow"></span></th>
+                <th data-sort="mfaEnabled" class="sortable">MFA <span class="arrow"></span></th>
+              </tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -80,6 +105,6 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
